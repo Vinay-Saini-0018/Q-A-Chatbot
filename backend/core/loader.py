@@ -9,7 +9,7 @@ def load_document(file):
     elif file.endswith(".docx"):
         loader = UnstructuredWordDocumentLoader(file)
     else:
-        raise valueError("Unsupported file type")
+        raise ValueError("Unsupported file type")
 
     document = loader.load()
     return document

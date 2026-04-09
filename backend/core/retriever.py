@@ -1,10 +1,12 @@
 from langchain_community.vectorstores import Chroma
 
 
-def get_retriever(persist_directory="./data/vector_store/"):
-    # We load the vector database that was saved to disk earlier, 
-    # rather than creating a new one with store_vectors()
-    from backend.core.chains import embedding_model
+def get_retriever(persist_directory="./data/vector_store/", embedding_model=None):
+    # Pass embedding_model as an argument instead of importing from chains.py
+    # to avoid circular imports.
+    if embedding_model is None:
+        raise ValueError("embedding_model must be provided to get_retriever")
+        
     vector_store = Chroma(
         persist_directory=persist_directory,
         embedding_function=embedding_model

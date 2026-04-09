@@ -1,4 +1,4 @@
-import langchain
+# langchain import removed as it was unused
 from langchain_google_genai import ChatGoogleGenerativeAI,GoogleGenerativeAIEmbeddings
 from dotenv import load_dotenv
 import os
@@ -29,6 +29,9 @@ def answer_query(query, filepath=None):
     if not filepath:
         return "Error: Please provide a file."
         
+    # Generate a unique folder name for the database based on the file's name
+    filename = os.path.splitext(os.path.basename(filepath))[0]
+    
     # Use absolute paths for production
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     vector_store_path = os.path.join(base_dir, "data", "vector_store", f"vector_store_{filename}")
@@ -47,8 +50,8 @@ def answer_query(query, filepath=None):
     else:
         print(f"Existing vector store found for {filename}. Bypassing file processing...")
 
-    # 1. Get our retriever
-    retriever = get_retriever(persist_directory=vector_store_path)
+    # 1. Get our retriever (passing the embedding model to avoid circular imports)
+    retriever = get_retriever(persist_directory=vector_store_path, embedding_model=embedding_model)
     
     # 2. Retrieve exactly what we need from vector_store
     retrieved_chunks = retriever.invoke(query)
