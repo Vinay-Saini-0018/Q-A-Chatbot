@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // API Configuration
+    const API_BASE_URL = 'https://q-a-chatbot-2.onrender.com';
+
     // DOM Elements
     const chatForm = document.getElementById('chat-form');
     const chatInput = document.getElementById('chat-input');
@@ -29,7 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Automatically fetch files that were already uploaded
     async function loadExistingFiles(retries = 3) {
         try {
-            const res = await fetch('https://q-a-chatbot-2.onrender.com/files');
+            const res = await fetch(`${API_BASE_URL}/files`);
+
             if (res.ok) {
                 const data = await res.json();
                 uploadedFiles = [];
@@ -106,7 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Send the request to our FastAPI backend using the first file uploaded
             const fileName = "data/" + uploadedFiles[0].name;
 
-            const response = await fetch('https://q-a-chatbot-2.onrender.com/ask', {
+            const response = await fetch(`${API_BASE_URL}/ask`, {
+
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -127,9 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             typingIndicator.classList.add('hidden');
-            appendMessage("Could not connect to the backend server.", 'bot');
-            console.error("Error:", error);
+            appendMessage(`Could not connect to the backend server at ${API_BASE_URL}. Please ensure the backend is running.`, 'bot');
+            console.error("Error connecting to backend:", error);
         }
+
     });
 
     // Dummy logic to make UI responsive
@@ -189,7 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 try {
                     // Upload file to the backend
-                    const response = await fetch('https://q-a-chatbot-2.onrender.com/upload', {
+                    const response = await fetch(`${API_BASE_URL}/upload`, {
+
                         method: 'POST',
                         body: formData
                     });

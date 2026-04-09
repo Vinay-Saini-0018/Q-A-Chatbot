@@ -13,6 +13,24 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+async def root():
+    return {"message": "Chatbot Backend is running!"}
+
+@app.get("/files")
+async def list_files():
+    """
+    Returns a list of all files in the 'data/' directory.
+    """
+    try:
+        if not os.path.exists("data"):
+            return {"files": []}
+        files = [f for f in os.listdir("data") if os.path.isfile(os.path.join("data", f))]
+        return {"files": files}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Could not list files: {str(e)}")
+
 class Query(BaseModel):
     query: str
     file: str
