@@ -38,7 +38,7 @@ async def list_files():
 
 class Query(BaseModel):
     query: str
-    file: str
+    file: str  # This should now be just the filename
 
 
 # this will take the file from user and save to data folder
@@ -65,8 +65,14 @@ def ask_question(query_obj: Query):
     Takes a query and a filepath, and returns the chatbot's answer based on the file content.
     """
     try:
-        # answer_query expects the question text and the filepath
-        answer = answer_query(query=query_obj.query, filepath=query_obj.file)
+        # Construct the absolute path to the file
+        file_path = os.path.join(DATA_DIR, query_obj.file)
+        
+        if not os.path.exists(file_path):
+             raise HTTPException(status_code=404, detail=f"File {query_obj.file} not found on server.")
+
+        # answer_query expects the question text and the absolute filepath
+        answer = answer_query(query=query_obj.query, filepath=file_path)
         
         return {"answer": answer}
     except Exception as e:

@@ -129,8 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollToBottom();
 
         try {
-            // Send the request to our FastAPI backend using the first file uploaded
-            const fileName = "data/" + uploadedFiles[0].name;
+            // Send only the filename to our FastAPI backend
+            const fileName = uploadedFiles[0].name;
 
             const response = await fetch(`${API_BASE_URL}/ask`, {
 
