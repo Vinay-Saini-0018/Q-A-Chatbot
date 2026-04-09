@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Q&A | AI Chatbot</title>
+    <!-- Google Fonts: Inter and Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar for File Uploads & Settings -->
+        <aside class="sidebar glass-panel">
+            <div class="sidebar-header">
+                <h2><i class="fa-solid fa-code-branch"></i> Q&A<strong>Chatbot</strong></h2>
+                <p class="subtitle">Ask to your file</p>
+            </div>
+
+            <div class="upload-section">
+                <div class="upload-zone" id="upload-zone">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <p>Drag & Drop files here</p>
+                    <span class="or-divider">or</span>
+                    <button class="btn-primary" onclick="document.getElementById('file-input').click()">Browse
+                        Files</button>
+                    <input type="file" id="file-input" hidden multiple accept=".pdf,.txt,.docx">
+                </div>
+                <p class="upload-info">Supported: PDF, TXT, DOCX</p>
+            </div>
+
+            <div class="document-list">
+                <h3>Uploaded Documents <span class="badge" id="doc-count">0</span></h3>
+                <ul id="doc-ul">
+                    <!-- Documents will populate here -->
+                    <li class="empty-state">No documents added yet</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="status-indicator">
+                    <span class="dot online"></span> API Connected
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-area">
+            <header class="chat-header glass-panel top-bar">
+                <div class="header-info">
+                    <h1>Document Assistant</h1>
+                    <p>Ask questions based on your uploaded knowledge base</p>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn" title="Clear Chat" id="clear-chat-btn"><i
+                            class="fa-solid fa-trash"></i></button>
+                    <button class="icon-btn" title="Settings"><i class="fa-solid fa-gear"></i></button>
+                </div>
+            </header>
+
+            <div class="chat-window" id="chat-window">
+                <div class="chat-messages" id="chat-messages">
+                    <!-- Welcome Message -->
+                    <div class="message bot appear-animation">
+                        <div class="avatar"><i class="fa-solid fa-robot"></i></div>
+                        <div class="message-content">
+                            <p>Hello! I am your personal assistant. Please upload some documents on the left side to ask questions about them.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Typing Indicator (Hidden by default) -->
+                <div class="typing-indicator hidden" id="typing-indicator">
+                    <div class="avatar"><i class="fa-solid fa-robot"></i></div>
+                    <div class="bubble">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area glass-panel">
+                <form id="chat-form" class="chat-form">
+                    <button type="button" class="icon-btn attach-btn"><i class="fa-solid fa-paperclip"></i></button>
+                    <input type="text" id="chat-input" placeholder="Ask a question about your documents..."
+                        autocomplete="off">
+                    <button type="submit" class="btn-send"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Markdown & Highlighting -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    
+    <script src="script.js"></script>
+</body>
+
+</html>

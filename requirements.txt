@@ -1,0 +1,23 @@
+langchain
+langchain-core
+langchain-community
+
+# To access google models
+langchain-google-genai
+google-generativeai
+
+python-dotenv
+
+# To handle files
+pypdf
+unstructured
+python-docx
+
+# vector database
+chromadb
+
+# API
+fastapi
+uvicorn
+pydantic
+python-multipart   # to unpacke http request files
