@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Automatically fetch files that were already uploaded
     async function loadExistingFiles(retries = 3) {
         try {
-            const res = await fetch('http://127.0.0.1:8000/files');
+            const res = await fetch('https://q-a-chatbot-2.onrender.com/files');
             if (res.ok) {
                 const data = await res.json();
                 uploadedFiles = [];
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Send the request to our FastAPI backend using the first file uploaded
             const fileName = "data/" + uploadedFiles[0].name;
 
-            const response = await fetch('http://127.0.0.1:8000/ask', {
+            const response = await fetch('https://q-a-chatbot-2.onrender.com/ask', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 try {
                     // Upload file to the backend
-                    const response = await fetch('http://127.0.0.1:8000/upload', {
+                    const response = await fetch('https://q-a-chatbot-2.onrender.com/upload', {
                         method: 'POST',
                         body: formData
                     });
