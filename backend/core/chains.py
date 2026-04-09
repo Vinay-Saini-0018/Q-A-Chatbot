@@ -29,9 +29,9 @@ def answer_query(query, filepath=None):
     if not filepath:
         return "Error: Please provide a file."
         
-    # Generate a unique folder name for the database based on the file's name
-    filename = os.path.splitext(os.path.basename(filepath))[0]
-    vector_store_path = f"./data/vector_store/vector_store_{filename}"
+    # Use absolute paths for production
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    vector_store_path = os.path.join(base_dir, "data", "vector_store", f"vector_store_{filename}")
     
     db_exists = os.path.exists(vector_store_path) and len(os.listdir(vector_store_path)) > 0
     

@@ -32,20 +32,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // Automatically fetch files that were already uploaded
     async function loadExistingFiles(retries = 3) {
         try {
+            console.log(`Connecting to backend at: ${API_BASE_URL}`);
             const res = await fetch(`${API_BASE_URL}/files`);
 
             if (res.ok) {
                 const data = await res.json();
                 uploadedFiles = [];
-                data.files.forEach(fileName => {
-                    uploadedFiles.push({ name: fileName });
-                });
+                if (data.files) {
+                    data.files.forEach(fileName => {
+                        uploadedFiles.push({ name: fileName });
+                    });
+                }
                 updateDocumentList();
+                updateApiStatus(true);
+            } else {
+                console.error("Backend returned an error:", res.status);
+                updateApiStatus(false);
             }
         } catch (e) {
-            console.warn("Waiting for backend to be ready...");
+            console.warn("Could not connect to backend. Retrying...", e);
+            updateApiStatus(false);
             if (retries > 0) {
-                setTimeout(() => loadExistingFiles(retries - 1), 1000);
+                setTimeout(() => loadExistingFiles(retries - 1), 2000);
+            }
+        }
+    }
+
+    function updateApiStatus(isOnline) {
+        const indicator = document.querySelector('.status-indicator .dot');
+        const text = document.querySelector('.status-indicator');
+        if (indicator && text) {
+            if (isOnline) {
+                indicator.className = 'dot online';
+                text.innerHTML = '<span class="dot online"></span> API Connected';
+            } else {
+                indicator.className = 'dot offline';
+                text.innerHTML = '<span class="dot offline"></span> API Disconnected';
             }
         }
     }

@@ -8,11 +8,16 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins (for local development)
+    allow_origins=["*"],  # Allows all origins for now. In production, you might want to restrict this to your frontend URL.
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Use an absolute path for the 'data' directory to avoid issues on different environments
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+os.makedirs(DATA_DIR, exist_ok=True)
 
 @app.get("/")
 async def root():
@@ -24,9 +29,9 @@ async def list_files():
     Returns a list of all files in the 'data/' directory.
     """
     try:
-        if not os.path.exists("data"):
+        if not os.path.exists(DATA_DIR):
             return {"files": []}
-        files = [f for f in os.listdir("data") if os.path.isfile(os.path.join("data", f))]
+        files = [f for f in os.listdir(DATA_DIR) if os.path.isfile(os.path.join(DATA_DIR, f))]
         return {"files": files}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Could not list files: {str(e)}")
@@ -43,8 +48,8 @@ async def upload_file(file: UploadFile = File(...)):
     Uploads a file and saves it to the 'data/' directory so it can be processed later.
     """
     try:
-        os.makedirs("data", exist_ok=True)
-        file_location = f"data/{file.filename}"
+        os.makedirs(DATA_DIR, exist_ok=True)
+        file_location = os.path.join(DATA_DIR, file.filename)
         
         with open(file_location, "wb+") as file_object:
             file_object.write(file.file.read())
