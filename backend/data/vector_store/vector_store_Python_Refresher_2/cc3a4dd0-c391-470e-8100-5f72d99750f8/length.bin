@@ -1,0 +1,4 @@
+invalid type: string "Used temporarily inside another function (e.g., map, filter).\nAvoiding defining a full function with def.\nAvoid Lambda Functions When:\nThe function is complex (use def for readability).\nMultiple operations/statements are needed.\nSummary\nFeature Example\nBasic Lambda Functionlambda x: x**2\nWith map() map(lambda x: x**2, numbers)\noduct) # Output: 24\nn
+â€¢ 
+â€¢ 
+â€¢ÿÿÿÿ

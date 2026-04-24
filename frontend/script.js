@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // API Configuration
-    const API_BASE_URL = 'https://q-a-chatbot-2.onrender.com';
+    //const API_BASE_URL = 'https://q-a-chatbot-2.onrender.com';
+    const API_BASE_URL = 'http://localhost:8000';
 
     // DOM Elements
     const chatForm = document.getElementById('chat-form');

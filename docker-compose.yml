@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: chatbot_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASS}          # ${DB_PASSWORD} file DB_PASSWORD mentioned in .env
+      POSTGRES_DB: chatbot
+    ports:
+      - "5432:5432"

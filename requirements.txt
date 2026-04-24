@@ -21,3 +21,8 @@ fastapi
 uvicorn
 pydantic
 python-multipart   # to unpacke http request files
+
+# postgressql
+langgraph
+langgraph-checkpoint-postgres
+psycopg[binary,pool]
