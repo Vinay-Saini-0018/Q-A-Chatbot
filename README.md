@@ -6,10 +6,13 @@ A full-stack RAG (Retrieval-Augmented Generation) chatbot that lets you upload P
 
 ## 📄 Q&A Chatbot — PDF Document Intelligence
 
-Start the backend First : After frontend after 4 - 5 minutes.
+Start backend First :
+- Then after 4 - 5 minutes start frontend.
 🔗 **[Backend Url](https://q-a-chatbot-2.onrender.com/)**
 🔗 **[Frontend Url](https://q-a-chatbot-3.onrender.com/)**
 
+- Backend takes time to start
+  
 ## ✨ Features
 
 - 📁 **PDF Upload** — Upload one or more PDF documents through the UI
