@@ -11,7 +11,7 @@ Start backend First :
 🔗 **[Backend Url](https://q-a-chatbot-2.onrender.com/)**
 🔗 **[Frontend Url](https://q-a-chatbot-3.onrender.com/)**
 
-- Backend takes time to start
+- Because Backend takes time to start
   
 ## ✨ Features
 
