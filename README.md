@@ -6,7 +6,9 @@ A full-stack RAG (Retrieval-Augmented Generation) chatbot that lets you upload P
 
 ## 📄 Q&A Chatbot — PDF Document Intelligence
 
-🔗 **[Live Demo](https://q-a-chatbot-3.onrender.com/)**
+Start the backend First :
+🔗 **[Backend Url](https://q-a-chatbot-2.onrender.com/)**
+🔗 **[Frontend Url](https://q-a-chatbot-3.onrender.com/)**
 
 ## ✨ Features
 
